@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
+    private void Start()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
 
     public void SetState(GameState newState)
     {
@@ -47,5 +51,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         _dropTimerCoroutine = null;
         OnDropTimerExpired?.Invoke(); // Tell the world the timer ran out!
+    }
+
+    public void ReturnHome()
+    {
+
     }
 }

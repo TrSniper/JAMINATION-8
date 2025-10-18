@@ -41,7 +41,19 @@ public class PlayerBlockController : MonoBehaviour
 
     void OnDisable()
     {
-        // Unsubscribe from all events...
+        // UI
+        BlockPalette.OnBlockDragStarted -= HandleDragStarted;
+
+        // InputManager
+        InputManager.OnPrimaryHold -= HandleDragUpdate;
+        InputManager.OnPrimaryRelease -= HandleDragRelease;
+        InputManager.OnPrecisionModeStarted -= () => _isPrecisionMode = true;
+        InputManager.OnPrecisionModeEnded -= () => _isPrecisionMode = false;
+        InputManager.OnSnapIncrement -= HandleSnapIncrement;
+        InputManager.OnSnapDecrement -= HandleSnapDecrement;
+
+        // GameManager
+        GameManager.OnDropTimerExpired -= HandleTimerExpired;
     }
 
     private void HandleDragStarted(BlockStock blockToDrag)
